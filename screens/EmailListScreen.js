@@ -10,6 +10,7 @@ export default function EmailListScreen({ navigation }){
         async function getData(){
             const response = await fetch('https://mobile.ect.ufrn.br:3002/emails');
             const emailList = await response.json();
+            console.log(emailList);
             setEmailList(emailList);
         }
         getData();
@@ -23,11 +24,11 @@ export default function EmailListScreen({ navigation }){
                     <View style = {styles.listItemLeft}>
                         <Image style={styles.image} source={{ uri: item.picture}}/>
                         <View>
+                            <Text style = {styles.tittle}>{item.from}</Text>
                             <Text style = {styles.tittle}>{item.tittle}</Text>
-                            <Text>json nao retorna summary</Text>
+                            <Text>{item.summary}</Text>
                         </View>
                     </View>
-                    
                     <View style = {styles.listItemRight}>
                         <Text>{item.time}</Text>
                     </View>                
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
     tittle:{
         fontWeight: 'bold',
     },
-
     image:{
         height: 50,
         width: 50,
