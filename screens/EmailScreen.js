@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import {StyleSheet, View, Text, Image} from "react-native";
 import {FontAwesome5} from '@expo/vector-icons';
-
+import { WebView } from 'react-native-webview';
 
 export default function EmailScreen({route}){
 
@@ -30,7 +30,10 @@ export default function EmailScreen({route}){
                 <Text>{email.from}</Text>
                 <Text>{email.time}</Text>
             </View>
-            
+            <WebView
+                originWhitelist={['*']}
+                source={{ html: email.body }}
+            />
         </View>
     );
 }
