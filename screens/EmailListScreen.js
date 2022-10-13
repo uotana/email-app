@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity } from "react-native";
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default function EmailListScreen({ navigation }){
 
@@ -17,21 +18,34 @@ export default function EmailListScreen({ navigation }){
     },[]);
 
     function renderItem({item}){
+        const defaultStar = <FontAwesome5 name={'star'} size={20} color='black'/>
+        const yellowStar = <FontAwesome5 name={'star'} solid size={20} color='gold'/>
+        
         return(
             <TouchableOpacity style={styles.listItem} onPress = {() => navigation.navigate('EmailScreen',{
                 id: item.id
             })}>
-                    <View style = {styles.listItemLeft}>
-                        <Image style={styles.image} source={{ uri: item.picture}}/>
-                        <View>
-                            <Text style = {styles.tittle}>{item.from}</Text>
-                            <Text style = {styles.tittle}>{item.tittle}</Text>
-                            <Text>{item.summary}</Text>
+                <View>
+                    <Image style={styles.image} source={{ uri: item.picture}}/>
+                </View>
+                <View style={styles.textBox}>
+                    <View style={styles.itemTop}>
+                        <View style = {styles.itemTopLeft}>
+                            <View>
+                                <Text style = {styles.tittle}>{item.from}</Text>
+                                <Text style = {styles.tittle}>{item.tittle}</Text>   
+                            </View>
                         </View>
+                        <View style = {styles.itemTopRight}>
+                            <Text>{item.time}</Text>
+                        </View>
+                    </View>    
+                    <View style={styles.itemBottom}>
+                        <Text>{item.summary}</Text>
+                        {item.star? yellowStar : defaultStar}
                     </View>
-                    <View style = {styles.listItemRight}>
-                        <Text>{item.time}</Text>
-                    </View>                
+                </View>
+                                    
             </TouchableOpacity>
         );
     }
@@ -53,7 +67,8 @@ export default function EmailListScreen({ navigation }){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        borderWidth: 0.5,
     },
     tittle:{
         fontWeight: 'bold',
@@ -65,20 +80,21 @@ const styles = StyleSheet.create({
         marginRight:15,
         borderRadius: 50,
     },
+    textBox:{
+        flex:1,
+    },
     listItem:{
-        width: 350,
-        paddingTop:15,
-        paddingBottom: 15,
+        flex: 1,
+        padding:15,
         marginTop:20,
         flexDirection: 'row',
+    },
+    itemTop: {
+        flexDirection:'row',
         justifyContent: 'space-between',
     },
-    listItemLeft:{
+    itemBottom:{
         flexDirection: 'row',
-        alignItems: 'flex-start',
-    },
-    listItemRight:{
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-    },
+        justifyContent: 'space-between',
+    }
 });
