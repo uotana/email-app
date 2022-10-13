@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        borderWidth: 0.5,
     },
     tittle:{
         fontWeight: 'bold',
@@ -76,7 +75,6 @@ const styles = StyleSheet.create({
     image:{
         height: 50,
         width: 50,
-        marginLeft:15,
         marginRight:15,
         borderRadius: 50,
     },
