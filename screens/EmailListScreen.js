@@ -11,14 +11,13 @@ export default function EmailListScreen({ navigation }){
         async function getData(){
             const response = await fetch('https://mobile.ect.ufrn.br:3002/emails');
             const emailList = await response.json();
-            console.log(emailList);
             setEmailList(emailList);
         }
         getData();
     },[]);
 
     function renderItem({item}){
-        const defaultStar = <FontAwesome5 name={'star'} size={20} color='black'/>
+        const defaultStar = <FontAwesome5 name={'star'} size={20} color='#565656'/>
         const yellowStar = <FontAwesome5 name={'star'} solid size={20} color='gold'/>
         
         return(
@@ -30,18 +29,14 @@ export default function EmailListScreen({ navigation }){
                 </View>
                 <View style={styles.textBox}>
                     <View style={styles.itemTop}>
-                        <View style = {styles.itemTopLeft}>
-                            <View>
-                                <Text style = {styles.tittle}>{item.from}</Text>
-                                <Text style = {styles.tittle}>{item.tittle}</Text>   
-                            </View>
-                        </View>
-                        <View style = {styles.itemTopRight}>
-                            <Text>{item.time}</Text>
-                        </View>
-                    </View>    
+                        <Text style = {styles.from}>{item.from}</Text>
+                        <Text style = {styles.time}>{item.time}</Text>
+                    </View>  
+                    <View>
+                        <Text style = {styles.tittle}>{item.tittle}</Text>   
+                    </View>  
                     <View style={styles.itemBottom}>
-                        <Text>{item.summary}</Text>
+                        <Text style={styles.summary}>{item.summary}</Text>
                         {item.star? yellowStar : defaultStar}
                     </View>
                 </View>
@@ -69,13 +64,18 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    from:{
+        fontWeight: 'bold',
+        fontSize: 18,
+    },
     tittle:{
         fontWeight: 'bold',
+        fontSize: 16,
     },
     image:{
         height: 50,
         width: 50,
-        marginRight:15,
+        marginRight:20,
         borderRadius: 50,
     },
     textBox:{
@@ -84,15 +84,24 @@ const styles = StyleSheet.create({
     listItem:{
         flex: 1,
         padding:15,
-        marginTop:20,
+        marginTop:15,
         flexDirection: 'row',
     },
     itemTop: {
         flexDirection:'row',
         justifyContent: 'space-between',
+        alignItems: 'baseline',
     },
     itemBottom:{
         flexDirection: 'row',
         justifyContent: 'space-between',
+    },
+    time: {
+        fontSize: 14,
+        fontWeight: 'bold'
+    },
+    summary: {
+        color: '#565656',
+        fontSize: 16
     }
 });

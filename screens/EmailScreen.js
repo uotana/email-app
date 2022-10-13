@@ -8,8 +8,8 @@ export default function EmailScreen({route}){
 
     const {id} = route.params;
     const [email, setEmail] = useState([]);
-    const defaultStar = <FontAwesome5 name={'star'} size={24} color='black'/>
-    const yellowStar = <FontAwesome5 name={'star'} solid size={24} color='gold'/>
+    const defaultStar = <FontAwesome5 name={'star'} size={20} color='#565656'/>
+    const yellowStar = <FontAwesome5 name={'star'} solid size={20} color='gold'/>
     
     useEffect(()=>{
         async function getData(){
@@ -29,8 +29,18 @@ export default function EmailScreen({route}){
             </View>
             <View style={styles.infoBox}>
                 <Image style={styles.image} source={{ uri: email.picture}}/>
-                <Text>{email.from}</Text>
-                <Text>{email.time}</Text>
+                <View style={styles.textInfoBox}>
+                    <View style={styles.textBox}>
+                        <Text style={styles.from}>{email.from}</Text>
+                        <Text style={styles.time}>{email.time}</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.toBox}>
+                            to me
+                        </Text>
+                    </View> 
+                </View>
+                
             </View>
             <WebView
                 originWhitelist={['*']}
@@ -43,25 +53,43 @@ export default function EmailScreen({route}){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        backgroundColor: '#fff',
         padding:20,
     },
     image:{
         height: 50,
         width: 50,
-        marginRight:15,
+        marginRight:20,
         borderRadius: 50,
     },
     tittle:{
-        fontSize: 30,
+        fontSize: 26,
     },
     tittleBox:{
-        marginBottom: 15,
+        marginBottom: 45,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
     },
     infoBox: {
         flexDirection: 'row',  
-        marginBottom: 15,
+        marginBottom: 25,
+    },
+    from:{
+        fontSize: 18,
+        fontWeight: '500',
+        marginRight:10,
+    },
+    time: {
+        color: '#565656',
+        fontSize: 14,
+    },
+    textBox: {
+        flexDirection: 'row',
+        alignItems: 'baseline',
+    },
+    toBox: {
+        color: '#565656',
+        fontSize: 16,
     }
 });

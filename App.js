@@ -11,7 +11,7 @@ export default function App(){
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="EmailListScreen" component={EmailListScreen} options={{title: 'Email List'}}/>
-        <Stack.Screen name="EmailScreen" component={EmailScreen} options={{title: 'Email'}}/>
+        <Stack.Screen name="EmailScreen" component={EmailScreen} options={{title: ''}}/>
       </Stack.Navigator>
     </NavigationContainer>
 
