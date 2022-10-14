@@ -24,7 +24,12 @@ export default function EmailScreen({route}){
         <View style = {styles.container}>
             <StatusBar style="auto"/>
             <View style={styles.tittleBox}>
-                <Text style={styles.tittle} >{email.tittle}</Text>
+                <View style={styles.tittleBoxLeft}>
+                    <Text style={styles.tittle} >{email.tittle}</Text>
+                    <View style={styles.inboxBox}>
+                        <Text style={styles.inbox}>Inbox</Text>
+                    </View> 
+                </View>
                 <Text>{email.star? yellowStar : defaultStar}</Text>
             </View>
             <View style={styles.infoBox}>
@@ -34,10 +39,11 @@ export default function EmailScreen({route}){
                         <Text style={styles.from}>{email.from}</Text>
                         <Text style={styles.time}>{email.time}</Text>
                     </View>
-                    <View>
-                        <Text style={styles.toBox}>
-                            to me
+                    <View style={styles.toBox}>
+                        <Text style={styles.to}>
+                            {email.to == 'Martin' ? 'to ' + email.to : email.to} 
                         </Text>
+                        <FontAwesome5 name={'chevron-down'} size={12} color='#565656'/>
                     </View> 
                 </View>
                 
@@ -64,12 +70,29 @@ const styles = StyleSheet.create({
     },
     tittle:{
         fontSize: 26,
+        marginRight:10,
     },
     tittleBox:{
         marginBottom: 45,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
+    },
+    tittleBoxLeft:{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    inbox:{
+        backgroundColor: '#EEEEEE',
+        paddingLeft: 6,
+        paddingRight: 6,
+        borderRadius: 4,
+        paddingBottom: 2,
+        marginBottom: 5,        
+        fontSize: 13,
+    },
+    inboxBox:{
+        alignSelf: 'flex-end'
     },
     infoBox: {
         flexDirection: 'row',  
@@ -88,8 +111,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'baseline',
     },
-    toBox: {
+    toBox:{
+        flexDirection: 'row',
+        alignItems: 'baseline'
+    },
+    to: {
         color: '#565656',
         fontSize: 16,
+        marginRight:10,
     }
 });
