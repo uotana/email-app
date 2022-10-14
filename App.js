@@ -10,7 +10,7 @@ export default function App(){
   return(
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="EmailListScreen" component={EmailListScreen} options={{title: 'Email List'}}/>
+        <Stack.Screen name="EmailListScreen" component={EmailListScreen} options={{title: 'Email App'}}/>
         <Stack.Screen name="EmailScreen" component={EmailScreen} options={{title: ''}}/>
       </Stack.Navigator>
     </NavigationContainer>
